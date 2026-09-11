@@ -3,11 +3,10 @@ package Tests;
 import BrowserManager.BrowserManager;
 import MyFrameWork.SeleniumFrameWork;
 import Pages.*;
+import Utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 
@@ -32,29 +31,32 @@ public class TestCase5 extends BrowserManager {
     HomePage homePage;
     SignUp_LogInPage signUpLogInPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void startUp() throws IOException {
 
         loadFromPropertiesFile();
         driver = openBrowserAndURL(properties.getProperty("browserName"));
         homePage = new HomePage(driver);
         myFrameWork = new SeleniumFrameWork(driver);
+        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully(), Utils.Constants.
+                HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
 
     @Test
-    public void testLogoutUser() {
+    public void testRegisterWithExistingEmail() {
 
-        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully());
         signUpLogInPage = homePage.clickSignUp_LogIn();
-        Assert.assertTrue(signUpLogInPage.checkNewUserSignupMassageIsVisible());
+        Assert.assertTrue(signUpLogInPage.checkNewUserSignupMassageIsVisible(),Utils.Constants
+                .NEW_USER_SIGNUP_MASSAGE_IS_NOT_VISIBLE);
         signUpLogInPage.signUpWithMyEmail();
-        Assert.assertTrue(signUpLogInPage.checkEmailAddressAlreadyExistMassageIsVisible());
+        Assert.assertTrue(signUpLogInPage.checkEmailAddressAlreadyExistMassageIsVisible(),Utils.Constants
+                .EMAIL_ADDRESS_ALREADY_EXIST_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void endOfTheTest() {
 
         myFrameWork.closeBrowser();

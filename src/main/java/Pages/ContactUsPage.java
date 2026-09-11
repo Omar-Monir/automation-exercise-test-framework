@@ -1,7 +1,7 @@
 package Pages;
 
 import MyFrameWork.SeleniumFrameWork;
-import Utilites.Utils;
+import Utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -46,7 +46,7 @@ public class ContactUsPage {
     @FindBy(css = ".btn-success")
     WebElement btnContinue;
 
-    public boolean verifyGerInTouchIsVisible(){
+    public boolean verifyGetInTouchIsVisible(){
 
         return myFrameWork.getText(txtGetInTouch).contains(Utils.Constants.GET_IN_TOUCH_PAGE_GET_IN_TOUCH_MESSAGE);
 

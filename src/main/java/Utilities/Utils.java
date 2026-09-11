@@ -1,4 +1,4 @@
-package Utilites;
+package Utilities;
 
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -23,7 +23,7 @@ public class Utils {
         //  Test Data - My User
         public static final String MY_EMAIL = "softwaretester@example.com";
         //  Test Data - Valid User
-        public static final String VALID_NAME = "Software Tester";
+        public static final String VALID_NAME = "Software";
         public static final String VALID_EMAIL = "software.test@example.com";
         public static final String VALID_PASSWORD = "Test@12345";
 
@@ -45,6 +45,11 @@ public class Utils {
         public static final String CITY = "Toronto";
         public static final String ZIPCODE = "M5V3L9";
         public static final String MOBILE_NUMBER = "1234567890";
+        public static final String NAME_ON_CARD = "SoftwareTester";
+        public static final String CARD_NUMBER = "4111 1111 1111 1111";
+        public static final String CVC = "123";
+        public static final String EXPIRATION_MONTH = "12";
+        public static final String EXPIRATION_YEAR = "2030";
 
         //Browser & URL
         public static final String BROWSER = "brave";
@@ -53,6 +58,9 @@ public class Utils {
         public static final String TEST_CASES_PAGE_URL = "https://www.automationexercise.com/test_cases";
         public static final String ALL_PRODUCTS_PAGE_URL = "https://www.automationexercise.com/products";
         public static final String FIRST_PRODUCT_DETAILS_PAGE_URL = "https://www.automationexercise.com/product_details/1";
+        public static final String CART_PAGE_URL = "https://www.automationexercise.com/view_cart";
+        public static final String CATEGORY_PAGE_URL = "category_products";
+        public static final String BRAND_PAGE_URL = "brand_products";
 
         //Contact Us
         public static final String SUBJECT = "Test Message";
@@ -90,6 +98,73 @@ public class Utils {
                 = "Success! Your details have been submitted successfully.";
         public static final String PRODUCT_PAGE_SEARCHED_PRODUCTS_MESSAGE
                 = "SEARCHED PRODUCTS";
+        public static final String ORDER_PLACED_SUCCESSFULLY_MASSAGE
+                = "Your order has been placed successfully!";
+
+        //Assertion fail messages
+        public static final String HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="HOME PAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String NEW_USER_SIGNUP_MASSAGE_IS_NOT_VISIBLE
+                ="NEW USER SIGNUP MASSAGE IS NOT VISIBLE ";
+        public static final String ACCOUNT_CREATED_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="ACCOUNT CREATED MASSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String ENTER_ACCOUNT_INFORMATION_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="ENTER ACCOUNT INFORMATION IS NOT VISIBLE SUCCESSFULLY";
+        public static final String DELETE_ACCOUNT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="DELETE ACCOUNT MASSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String LOGGING_TO_YOUR_ACCOUNT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="LOGGING TO YOUR ACCOUNT MASSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String LOGGED_IN_AS_USER_NAME_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="LOGGED IN AS USER NAME IS NOT VISIBLE SUCCESSFULLY";
+        public static final String EMAIL_OR_PASSWORD_IS_NOT_CORRECT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="EMAIL OR PASSWORD IS NOT CORRECT MASSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String SIGNUP_LOGIN_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="SIGNUP_LOGIN PAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String EMAIL_ADDRESS_ALREADY_EXIST_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="EMAIL ADDRESS ALREADY EXIST MASSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String GET_IN_TOUCHE_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="GET IN TOUCHE MASSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String SUBMIT_SUCCESSFULLY_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="SUBMIT SUCCESSFULLY MASSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String TEST_CASE_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="TEST CASE PAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String ALL_PRODUCTS_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="ALL PRODUCTS PAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String PRODUCTS_DETAILS_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="PRODUCTS DETAILS PAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String DETAILS_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="DETAILS IS NOT VISIBLE SUCCESSFULLY";
+        public static final String SEARCH_PRODUCTS_MESSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="SEARCH PRODUCTS MESSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String HOME_SUBSCRIPTION_MESSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="HOME SUBSCRIPTION MESSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String HOME_SUCCESSFUL_SUBSCRIPTION_MESSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="HOME SUCCESSFUL SUBSCRIPTION MESSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String CART_SUBSCRIPTION_MESSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="CART SUBSCRIPTION MESSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String CART_SUCCESSFUL_SUBSCRIPTION_MESSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="CART SUCCESSFUL SUBSCRIPTION MESSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String FIRST_PRODUCT_IS_NOT_ADDED_SUCCESSFULLY
+                ="FIRST PRODUCT IS NOT ADDED SUCCESSFULLY";
+        public static final String SECOND_PRODUCT_IS_NOT_ADDED_SUCCESSFULLY
+                ="SECOND PRODUCT IS NOT ADDED SUCCESSFULLY";
+        public static final String QUANTITY_OF_PRODUCT_IS_NOT_RIGHT
+                ="QUANTITY OF PRODUCT IS NOT RIGHT";
+        public static final String CART_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="CART PAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String YOUR_ORDER_HAS_PLACED_SUCCESSFULLY_MESSAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="YOUR ORDER HAS PLACED SUCCESSFULLY MESSAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String PRODUCT_IS_NOT_DELETED_SUCCESSFULLY
+                ="PRODUCT IS NOT DELETED SUCCESSFULLY";
+        public static final String CATEGORIES_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="CATEGORIES IS NOT VISIBLE SUCCESSFULLY";
+        public static final String CATEGORY_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="CATEGORY PAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String BRAND_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="BRAND IS NOT VISIBLE SUCCESSFULLY";
+        public static final String BRAND_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY
+                ="BRAND PAGE IS NOT VISIBLE SUCCESSFULLY";
+
 
 
         // Other
@@ -97,6 +172,7 @@ public class Utils {
         public static final String REPORT_PATH = System.getProperty("user.dir") + "/reports/";
         public static final String SEARCH_PRODUCT = "DRESS";
         public static final String QUANTITY = "4";
+        public static final String CHECK_OUT_COMMENT = "This is a gift, kindly wrap it nicely.";
     }
 
     // Make time dependant E-mail

@@ -1,7 +1,7 @@
 package Pages;
 
 import MyFrameWork.SeleniumFrameWork;
-import Utilites.Utils;
+import Utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,6 +44,35 @@ public class CartPage {
     @FindBy(css = "td button")
     WebElement quantityOfTheProduct;
 
+    @FindBy(css = "a[class='btn btn-default check_out']")
+    WebElement btnProceedToCheckOut;
+
+    @FindBy(css = "a[href='/login'] u")
+    WebElement lnkCheckOut_RegisterLogin;
+
+    @FindBy(css = "[class='cart_quantity_delete']")
+    WebElement btnDeleteProduct;
+
+    public void clickXButton(){
+
+        myFrameWork.click(btnDeleteProduct);
+
+    }
+
+    public SignUp_LogInPage clickCheckOut_Register_Login(){
+
+        myFrameWork.click(lnkCheckOut_RegisterLogin);
+        return new SignUp_LogInPage(driver);
+
+    }
+
+    public CheckOutPage clickProceedToCheckOut(){
+
+        myFrameWork.click(btnProceedToCheckOut);
+        return new CheckOutPage(driver);
+
+    }
+
     public void scrollToCartFooter(){
 
         myFrameWork.scrollToElement(footer);
@@ -85,6 +114,12 @@ public class CartPage {
     public boolean checkTheQuantityOfTheProduct(){
 
         return  myFrameWork.getText(quantityOfTheProduct).contains(Utils.Constants.QUANTITY);
+
+    }
+
+    public boolean userIsInCartPage(){
+
+        return myFrameWork.getCurrentURL().contains(Utils.Constants.CART_PAGE_URL);
 
     }
 

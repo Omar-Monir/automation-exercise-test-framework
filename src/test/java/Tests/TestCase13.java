@@ -1,5 +1,18 @@
 package Tests;
 
+import BrowserManager.BrowserManager;
+import MyFrameWork.SeleniumFrameWork;
+import Pages.CartPage;
+import Pages.HomePage;
+import Pages.ProductDetailsPage;
+import Pages.ProductsPage;
+import Utilities.Utils;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import java.io.IOException;
+
 /*
    Test Case 13: Verify Product quantity in Cart
 1. Launch browser
@@ -13,20 +26,6 @@ package Tests;
 9. Verify that product is displayed in cart page with exact quantity
  */
 
-import BrowserManager.BrowserManager;
-import MyFrameWork.SeleniumFrameWork;
-import Pages.CartPage;
-import Pages.HomePage;
-import Pages.ProductDetailsPage;
-import Pages.ProductsPage;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
-import java.io.IOException;
-
 public class TestCase13 extends BrowserManager {
 
     WebDriver driver;
@@ -38,14 +37,15 @@ public class TestCase13 extends BrowserManager {
 
 
 
-    @BeforeTest
+    @BeforeMethod
     public void startUp() throws IOException {
 
         loadFromPropertiesFile();
         driver = openBrowserAndURL(properties.getProperty("browserName"));
         homePage = new HomePage(driver);
         myFrameWork = new SeleniumFrameWork(driver);
-        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully());
+        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully(), Utils.Constants.
+                HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
@@ -55,15 +55,17 @@ public class TestCase13 extends BrowserManager {
         productsPage = homePage.clickProducts();
         productsPage.scrollTo4thProduct();
         productDetailsPage = productsPage.clickViewFirstProduct();
-        Assert.assertTrue(productDetailsPage.verifyThatProductDetailsPageIsVisibleSuccessfully());
+        Assert.assertTrue(productDetailsPage.verifyThatProductDetailsPageIsVisibleSuccessfully(),Utils.Constants
+                .PRODUCTS_DETAILS_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
         productDetailsPage.setQuantity();
         productDetailsPage.clickAddToCart();
         cartPage = productDetailsPage.clickViewCart();
-        Assert.assertTrue(cartPage.checkTheQuantityOfTheProduct());
+        Assert.assertTrue(cartPage.checkTheQuantityOfTheProduct(),Utils.Constants
+                .QUANTITY_OF_PRODUCT_IS_NOT_RIGHT);
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void endOfTheTest() {
 
         myFrameWork.closeBrowser();

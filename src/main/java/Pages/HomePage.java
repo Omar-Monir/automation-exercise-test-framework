@@ -1,7 +1,7 @@
 package Pages;
 
 import MyFrameWork.SeleniumFrameWork;
-import Utilites.Utils;
+import Utilities.Utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,6 +59,30 @@ public class HomePage {
 
     @FindBy(id = "success-subscribe")
     WebElement txtSuccessSubscribe;
+
+    @FindBy(css = "a[href='/product_details/4']")
+    WebElement lnkFourthItemViewProduct;
+
+    @FindBy(css = "img[src='/get_product_picture/1']")
+    WebElement imgFirstProduct;
+
+    @FindBy(css = "div[class='overlay-content'] a[data-product-id='1']")
+    WebElement btnAddToCart;
+
+    @FindBy(css = "a[href='/view_cart'] u")
+    WebElement lnkViewCart;
+
+    @FindBy(css = "[href='/product_details/1']")
+    WebElement lnkFirstViewProduct;
+
+    @FindBy(id = "accordian")
+    WebElement categories;
+
+    @FindBy(css = "a[href='#Women'] span[class='badge pull-right'] ")
+    WebElement btnWomenPlus;
+
+    @FindBy(css = "[href='/category_products/1']")
+    WebElement lnkDress;
 
     public boolean verifyThatHomePageIsVisibleSuccessfully() {
 
@@ -134,6 +158,12 @@ public class HomePage {
 
     }
 
+    public void scrollToFirstProductView(){
+
+        myFrameWork.scrollToElement(lnkFirstViewProduct);
+
+    }
+
 
 
     public AccountDeletedPage clickDeleteAccount() {
@@ -147,6 +177,35 @@ public class HomePage {
 
         myFrameWork.click(lnkLogOutAccount);
         return new SignUp_LogInPage(driver);
+
+    }
+
+    public void addProductToCart(){
+
+        myFrameWork.scrollToElement(lnkFourthItemViewProduct);
+        myFrameWork.hoverOverElement(imgFirstProduct);
+        myFrameWork.click(btnAddToCart);
+
+    }
+
+    public CartPage clickViewCart(){
+
+        myFrameWork.click(lnkViewCart);
+        return new CartPage(driver);
+
+    }
+
+    public boolean checkThatCategoriesAreVisible(){
+
+        return myFrameWork.isElementVisible(categories);
+
+    }
+
+    public CategoryPage clickOnTheDress(){
+
+        myFrameWork.click(btnWomenPlus);
+        myFrameWork.click(lnkDress);
+        return new CategoryPage(driver);
 
     }
 

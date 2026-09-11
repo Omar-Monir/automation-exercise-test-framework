@@ -1,5 +1,17 @@
 package Tests;
 
+import BrowserManager.BrowserManager;
+import MyFrameWork.SeleniumFrameWork;
+import Pages.CartPage;
+import Pages.HomePage;
+import Pages.ProductsPage;
+import Utilities.Utils;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import java.io.IOException;
+
 /*
    Test Case 12: Add Products in Cart
 1. Launch browser
@@ -14,19 +26,6 @@ package Tests;
 10. Verify their prices, quantity and total price
  */
 
-import BrowserManager.BrowserManager;
-import MyFrameWork.SeleniumFrameWork;
-import Pages.CartPage;
-import Pages.HomePage;
-import Pages.ProductsPage;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
-import java.io.IOException;
-
 public class TestCase12 extends BrowserManager {
 
     WebDriver driver;
@@ -35,14 +34,15 @@ public class TestCase12 extends BrowserManager {
     ProductsPage productsPage;
     CartPage cartPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void startUp() throws IOException {
 
         loadFromPropertiesFile();
         driver = openBrowserAndURL(properties.getProperty("browserName"));
         homePage = new HomePage(driver);
         myFrameWork = new SeleniumFrameWork(driver);
-        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully());
+        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully(), Utils.Constants.
+                HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
@@ -55,12 +55,14 @@ public class TestCase12 extends BrowserManager {
         productsPage.clickContinue();
         productsPage.clickAddSecondProductToCart();
         cartPage = productsPage.clickViewCart();
-        Assert.assertTrue(cartPage.checkFirstProductIsAdded());
-        Assert.assertTrue(cartPage.checkSecondProductIsAdded());
+        Assert.assertTrue(cartPage.checkFirstProductIsAdded(),Utils.Constants
+                .FIRST_PRODUCT_IS_NOT_ADDED_SUCCESSFULLY);
+        Assert.assertTrue(cartPage.checkSecondProductIsAdded(),Utils.Constants
+                .SECOND_PRODUCT_IS_NOT_ADDED_SUCCESSFULLY);
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void endOfTheTest() {
 
         myFrameWork.closeBrowser();

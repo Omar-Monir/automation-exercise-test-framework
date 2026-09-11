@@ -2,12 +2,11 @@ package Tests;
 
 import MyFrameWork.SeleniumFrameWork;
 import Pages.*;
+import Utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import BrowserManager.*;
-import org.testng.annotations.Test;
 
 import java.io.IOException;
 
@@ -46,34 +45,39 @@ public class TestCase1 extends BrowserManager {
     AccountCreatedPage accountCreatedPage;
     AccountDeletedPage accountDeletedPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void startUp() throws IOException {
 
         loadFromPropertiesFile();
         driver=openBrowserAndURL(properties.getProperty("browserName"));
         homePage = new HomePage(driver);
         myFrameWork=new SeleniumFrameWork(driver);
+        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully(), Utils.Constants
+                .HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
     @Test
     public void testRegisterUser() {
 
-        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully());
         signUpLogInPage = homePage.clickSignUp_LogIn();
-        Assert.assertTrue(signUpLogInPage.checkNewUserSignupMassageIsVisible());
+        Assert.assertTrue(signUpLogInPage.checkNewUserSignupMassageIsVisible(),Utils.Constants
+                .NEW_USER_SIGNUP_MASSAGE_IS_NOT_VISIBLE);
         enterAccountInformation =signUpLogInPage.signUp();
-        Assert.assertTrue(enterAccountInformation.checkEnterAccountInformationMassageIsVisible());
+        Assert.assertTrue(enterAccountInformation.checkEnterAccountInformationMassageIsVisible(),Utils.Constants
+                .ENTER_ACCOUNT_INFORMATION_IS_NOT_VISIBLE_SUCCESSFULLY);
         accountCreatedPage = enterAccountInformation.createAccount();
-        Assert.assertTrue(accountCreatedPage.checkAccountCreatedMassageIsVisible());
+        Assert.assertTrue(accountCreatedPage.checkAccountCreatedMassageIsVisible(),Utils.Constants
+                .ACCOUNT_CREATED_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
         homePage = accountCreatedPage.clickContinueButton();
         accountDeletedPage=homePage.clickDeleteAccount();
-        Assert.assertTrue(accountDeletedPage.checkDeleteAccountMassageIsVisible());
+        Assert.assertTrue(accountDeletedPage.checkDeleteAccountMassageIsVisible(),Utils.Constants
+                .DELETE_ACCOUNT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
         accountDeletedPage.clickContinueButton();
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void endOfTheTest(){
 
         myFrameWork.closeBrowser();

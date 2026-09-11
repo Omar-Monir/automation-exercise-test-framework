@@ -1,7 +1,7 @@
 package Pages;
 
 import MyFrameWork.SeleniumFrameWork;
-import Utilites.Utils;
+import Utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,7 +41,7 @@ public class SignUp_LogInPage {
     @FindBy(css = "input[data-qa='login-email']")
     WebElement logInEmail;
 
-    @FindBy(css = "input[name='password'")
+    @FindBy(css = "input[name='password']")
     WebElement password;
 
     @FindBy(css = "button[data-qa='signup-button']")

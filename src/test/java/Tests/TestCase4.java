@@ -3,11 +3,10 @@ package Tests;
 import BrowserManager.BrowserManager;
 import MyFrameWork.SeleniumFrameWork;
 import Pages.*;
+import Utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 
@@ -34,30 +33,34 @@ public class TestCase4 extends BrowserManager {
     HomePage homePage;
     SignUp_LogInPage signUpLogInPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void startUp() throws IOException {
 
         loadFromPropertiesFile();
         driver = openBrowserAndURL(properties.getProperty("browserName"));
         homePage = new HomePage(driver);
         myFrameWork = new SeleniumFrameWork(driver);
+        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully(), Utils.Constants.
+                HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
     @Test
     public void  testLogoutUser(){
 
-        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully());
         signUpLogInPage=homePage.clickSignUp_LogIn();
-        signUpLogInPage.checkLoggingToYourAccountMassageIsVisible();
+        Assert.assertTrue(signUpLogInPage.checkLoggingToYourAccountMassageIsVisible(),Utils.Constants
+                .LOGGING_TO_YOUR_ACCOUNT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
         homePage = signUpLogInPage.logInWithMyEmailAndPassword();
-        Assert.assertTrue(homePage.checkLoggedInAsUserNameIsVisible());
+        Assert.assertTrue(homePage.checkLoggedInAsUserNameIsVisible(),Utils.Constants
+                .LOGGED_IN_AS_USER_NAME_IS_NOT_VISIBLE_SUCCESSFULLY);
         signUpLogInPage=homePage.clickLogOutAccount();
-        Assert.assertTrue(signUpLogInPage.UserInSignUp_LogInPage());
+        Assert.assertTrue(signUpLogInPage.UserInSignUp_LogInPage(),Utils.Constants
+                .SIGNUP_LOGIN_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void endOfTheTest(){
 
         myFrameWork.closeBrowser();

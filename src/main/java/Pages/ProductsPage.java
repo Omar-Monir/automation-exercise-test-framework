@@ -1,7 +1,7 @@
 package Pages;
 
 import MyFrameWork.SeleniumFrameWork;
-import Utilites.Utils;
+import Utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +19,12 @@ public class ProductsPage {
         myFrameWork = new SeleniumFrameWork(driver);
 
     }
+
+    @FindBy(css = "[href='/brand_products/Biba']")
+    WebElement lnkBiba;
+
+    @FindBy(css = "[class='brands_products']")
+    WebElement brand;
 
     @FindBy(css = "[href='/product_details/1']")
     WebElement lnkViewFirstProduct;
@@ -117,6 +123,25 @@ public class ProductsPage {
     public void clickContinue(){
 
         myFrameWork.click(btnContinue);
+
+    }
+
+    public void scrollToBiba(){
+
+        myFrameWork.scrollToElement(lnkBiba);
+
+    }
+
+    public boolean checkBrandIsVisible(){
+
+        return myFrameWork.isElementVisible(brand);
+
+    }
+
+    public BrandPage clickOnBiba(){
+
+        myFrameWork.click(lnkBiba);
+        return new BrandPage(driver);
 
     }
 

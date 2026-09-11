@@ -1,5 +1,17 @@
 package Tests;
 
+import BrowserManager.BrowserManager;
+import MyFrameWork.SeleniumFrameWork;
+import Pages.HomePage;
+import Pages.ProductsPage;
+
+import Utilities.Utils;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import java.io.IOException;
+
 /*
    Test Case 9: Search Product
 1. Launch browser
@@ -11,19 +23,6 @@ package Tests;
 7. Verify 'SEARCHED PRODUCTS' is visible
  */
 
-import BrowserManager.BrowserManager;
-import MyFrameWork.SeleniumFrameWork;
-import Pages.HomePage;
-import Pages.ProductsPage;
-
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
-import java.io.IOException;
-
 public class TestCase9 extends BrowserManager {
 
     WebDriver driver;
@@ -31,14 +30,15 @@ public class TestCase9 extends BrowserManager {
     HomePage homePage;
     ProductsPage productsPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void startUp() throws IOException {
 
         loadFromPropertiesFile();
         driver = openBrowserAndURL(properties.getProperty("browserName"));
         homePage = new HomePage(driver);
         myFrameWork = new SeleniumFrameWork(driver);
-        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully());
+        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully(), Utils.Constants.
+                HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
@@ -46,13 +46,15 @@ public class TestCase9 extends BrowserManager {
     public void testSearchProduct(){
 
         productsPage = homePage.clickProducts();
-        Assert.assertTrue(productsPage.verifyThatAllProductsPageIsVisibleSuccessfully());
+        Assert.assertTrue(productsPage.verifyThatAllProductsPageIsVisibleSuccessfully(),Utils.Constants
+                .ALL_PRODUCTS_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
         productsPage.searchForProduct();
-        Assert.assertTrue(productsPage.verifyThatSearchedProductsMessageIsVisibleSuccessfully());
+        Assert.assertTrue(productsPage.verifyThatSearchedProductsMessageIsVisibleSuccessfully(),Utils.Constants
+                .SEARCH_PRODUCTS_MESSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void endOfTheTest() {
 
         myFrameWork.closeBrowser();

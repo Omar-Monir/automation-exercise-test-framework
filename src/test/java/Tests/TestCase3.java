@@ -2,14 +2,12 @@ package Tests;
 
 import BrowserManager.BrowserManager;
 import MyFrameWork.SeleniumFrameWork;
-import Pages.AccountDeletedPage;
 import Pages.HomePage;
 import Pages.SignUp_LogInPage;
+import Utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 
@@ -35,28 +33,31 @@ public class TestCase3 extends BrowserManager {
     HomePage homePage;
     SignUp_LogInPage signUpLogInPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void startUp() throws IOException {
 
         loadFromPropertiesFile();
         driver = openBrowserAndURL(properties.getProperty("browserName"));
         homePage = new HomePage(driver);
         myFrameWork = new SeleniumFrameWork(driver);
+        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully(), Utils.Constants.
+                HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
     @Test
     public void testLoginUserWithIncorrectEmailAndPassword(){
 
-        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully());
         signUpLogInPage=homePage.clickSignUp_LogIn();
-        Assert.assertTrue(signUpLogInPage.checkLoggingToYourAccountMassageIsVisible());
+        Assert.assertTrue(signUpLogInPage.checkLoggingToYourAccountMassageIsVisible(),Utils.Constants
+                .LOGGING_TO_YOUR_ACCOUNT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
         signUpLogInPage.logInWithInValidEmailAndPassword();
-        Assert.assertTrue(signUpLogInPage.checkEmailOrPasswordIsNotCorrectMessageIsVisible());
+        Assert.assertTrue(signUpLogInPage.checkEmailOrPasswordIsNotCorrectMessageIsVisible(),Utils.Constants
+                .EMAIL_OR_PASSWORD_IS_NOT_CORRECT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void endOfTheTest(){
 
         myFrameWork.closeBrowser();

@@ -6,11 +6,10 @@ import Pages.ProductDetailsPage;
 import Pages.HomePage;
 import Pages.ProductsPage;
 
+import Utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 
@@ -35,14 +34,15 @@ public class TestCase8 extends BrowserManager {
     ProductsPage productsPage;
     ProductDetailsPage firstProduct;
 
-    @BeforeTest
+    @BeforeMethod
     public void startUp() throws IOException {
 
         loadFromPropertiesFile();
         driver = openBrowserAndURL(properties.getProperty("browserName"));
         homePage = new HomePage(driver);
         myFrameWork = new SeleniumFrameWork(driver);
-        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully());
+        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully(), Utils.Constants.
+                HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
@@ -50,14 +50,17 @@ public class TestCase8 extends BrowserManager {
     public void testVerifyAllProductsAndProductDetailPage(){
 
         productsPage = homePage.clickProducts();
-        Assert.assertTrue(productsPage.verifyThatAllProductsPageIsVisibleSuccessfully());
+        Assert.assertTrue(productsPage.verifyThatAllProductsPageIsVisibleSuccessfully(),Utils.Constants
+                .ALL_PRODUCTS_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
         firstProduct = productsPage.clickViewFirstProduct();
-        Assert.assertTrue(firstProduct.verifyThatProductDetailsPageIsVisibleSuccessfully());
-        Assert.assertTrue(firstProduct.verifyThatDetailIsVisible());
+        Assert.assertTrue(firstProduct.verifyThatProductDetailsPageIsVisibleSuccessfully(),Utils.Constants
+                .PRODUCTS_DETAILS_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
+        Assert.assertTrue(firstProduct.verifyThatDetailIsVisible(),Utils.Constants
+                .DETAILS_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void endOfTheTest() {
 
         myFrameWork.closeBrowser();

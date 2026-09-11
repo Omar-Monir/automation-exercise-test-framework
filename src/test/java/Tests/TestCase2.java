@@ -5,11 +5,10 @@ import MyFrameWork.SeleniumFrameWork;
 import Pages.AccountDeletedPage;
 import Pages.HomePage;
 import Pages.SignUp_LogInPage;
+import Utilities.Utils;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 
@@ -37,30 +36,34 @@ public class TestCase2 extends BrowserManager {
     SignUp_LogInPage signUpLogInPage;
     AccountDeletedPage accountDeletedPage;
 
-    @BeforeTest
+    @BeforeMethod
     public void startUp() throws IOException {
 
         loadFromPropertiesFile();
         driver=openBrowserAndURL(properties.getProperty("browserName"));
         homePage = new HomePage(driver);
         myFrameWork=new SeleniumFrameWork(driver);
+        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully(), Utils.Constants.
+                HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
     @Test(description = "Login User with correct email and password")
     public void testLogInUserWithCorrectEmailAndPassword(){
 
-        Assert.assertTrue(homePage.verifyThatHomePageIsVisibleSuccessfully());
         signUpLogInPage=homePage.clickSignUp_LogIn();
-        Assert.assertTrue(signUpLogInPage.checkLoggingToYourAccountMassageIsVisible());
+        Assert.assertTrue(signUpLogInPage.checkLoggingToYourAccountMassageIsVisible(),Utils.Constants
+                .LOGGING_TO_YOUR_ACCOUNT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
         homePage=signUpLogInPage.logInWithValidEmailAndPassword();
-        Assert.assertTrue( homePage.checkLoggedInAsUserNameIsVisible());
+        Assert.assertTrue( homePage.checkLoggedInAsUserNameIsVisible(),Utils.Constants
+                .LOGGED_IN_AS_USER_NAME_IS_NOT_VISIBLE_SUCCESSFULLY);
         accountDeletedPage=homePage.clickDeleteAccount();
-        accountDeletedPage.checkDeleteAccountMassageIsVisible();
+        Assert.assertTrue(accountDeletedPage.checkDeleteAccountMassageIsVisible(),Utils.Constants
+                .DELETE_ACCOUNT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void endOfTheTest(){
 
         myFrameWork.closeBrowser();
