@@ -2,10 +2,9 @@ package Tests;
 
 import BrowserManager.BrowserManager;
 import MyFrameWork.SeleniumFrameWork;
-import Pages.AccountDeletedPage;
-import Pages.HomePage;
-import Pages.SignUp_LogInPage;
+import Pages.*;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -28,6 +27,8 @@ import java.io.IOException;
 10. Verify that 'ACCOUNT DELETED!' is visible
  */
 
+@Epic("Automation Exercise Website")
+@Feature("User Account Management")
 public class TestCase2 extends BrowserManager {
 
     WebDriver driver;
@@ -35,6 +36,8 @@ public class TestCase2 extends BrowserManager {
     HomePage homePage;
     SignUp_LogInPage signUpLogInPage;
     AccountDeletedPage accountDeletedPage;
+    EnterAccountInformation enterAccountInformation;
+    AccountCreatedPage accountCreatedPage;
 
     @BeforeMethod
     public void startUp() throws IOException {
@@ -48,13 +51,20 @@ public class TestCase2 extends BrowserManager {
 
     }
 
-    @Test(description = "Login User with correct email and password")
+    @Test
+    @Story("Login with correct email and password")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("This test verifies that a user can login successfully with valid credentials and then delete the account")
     public void testLogInUserWithCorrectEmailAndPassword(){
 
         signUpLogInPage=homePage.clickSignUp_LogIn();
+        enterAccountInformation = signUpLogInPage.signUpWithMyEmail();
+        accountCreatedPage = enterAccountInformation.createAccount();
+        homePage = accountCreatedPage.clickContinueButton();
+        signUpLogInPage = homePage.clickLogOut();
         Assert.assertTrue(signUpLogInPage.checkLoggingToYourAccountMassageIsVisible(),Utils.Constants
                 .LOGGING_TO_YOUR_ACCOUNT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
-        homePage=signUpLogInPage.logInWithValidEmailAndPassword();
+        homePage=signUpLogInPage.logInWithMyEmailAndPassword();
         Assert.assertTrue( homePage.checkLoggedInAsUserNameIsVisible(),Utils.Constants
                 .LOGGED_IN_AS_USER_NAME_IS_NOT_VISIBLE_SUCCESSFULLY);
         accountDeletedPage=homePage.clickDeleteAccount();

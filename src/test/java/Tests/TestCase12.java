@@ -6,6 +6,7 @@ import Pages.CartPage;
 import Pages.HomePage;
 import Pages.ProductsPage;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -26,6 +27,8 @@ import java.io.IOException;
 10. Verify their prices, quantity and total price
  */
 
+@Epic("Automation Exercise Website")
+@Feature("Cart")
 public class TestCase12 extends BrowserManager {
 
     WebDriver driver;
@@ -47,16 +50,19 @@ public class TestCase12 extends BrowserManager {
     }
 
     @Test
+    @Story("Add multiple products to cart")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("This test verifies that the user can add multiple products to the cart successfully")
     public void  testAddProductsInCart(){
 
         productsPage = homePage.clickProducts();
         productsPage.scrollTo4thProduct();
-        productsPage.clickAddFirstProductToCart();
+        productsPage.clickAddImgSleeveLessDreesProductToCart();
         productsPage.clickContinue();
         productsPage.clickAddSecondProductToCart();
         cartPage = productsPage.clickViewCart();
-        Assert.assertTrue(cartPage.checkFirstProductIsAdded(),Utils.Constants
-                .FIRST_PRODUCT_IS_NOT_ADDED_SUCCESSFULLY);
+        Assert.assertTrue(cartPage.checkSleeveLessProductIsAdded(),Utils.Constants
+                .SLEEVE_LESS_PRODUCT_IS_NOT_ADDED_SUCCESSFULLY);
         Assert.assertTrue(cartPage.checkSecondProductIsAdded(),Utils.Constants
                 .SECOND_PRODUCT_IS_NOT_ADDED_SUCCESSFULLY);
 

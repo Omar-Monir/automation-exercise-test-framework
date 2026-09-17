@@ -47,6 +47,25 @@ public class ProductDetailsPage {
     @FindBy (css = "a u")
     WebElement lnkViewCart;
 
+    @FindBy (css = "[href='#reviews']")
+    WebElement txtWriteYourReview;
+
+    @FindBy (id = "name")
+    WebElement enterName;
+
+    @FindBy (id = "email")
+    WebElement enterEmail;
+
+    @FindBy (id = "review")
+    WebElement enterReview;
+
+    @FindBy (id = "button-review")
+    WebElement btnSubmitReview;
+
+    @FindBy (css = "div[class='col-md-12 form-group'] div[class='alert-success alert']")
+    WebElement reviewMessage;
+
+
 
     public boolean verifyThatProductDetailsPageIsVisibleSuccessfully(){
 
@@ -81,8 +100,27 @@ public class ProductDetailsPage {
 
     }
 
+    public boolean checkWriteYourReviewIsVisible(){
 
+        return myFrameWork.getText(txtWriteYourReview).contains(Utils.Constants
+                .WRITE_YOUR_REVIEW_TEXT);
 
+    }
 
+    public void clickSubmitReviewButton(){
+
+        myFrameWork.scrollToElement(btnSubmitReview);
+        myFrameWork.sendKeys(enterName,Utils.Constants.MY_EMAIL);
+        myFrameWork.sendKeys(enterEmail,Utils.Constants.VALID_PASSWORD);
+        myFrameWork.sendKeys(enterReview,Utils.Constants.REVIEW);
+        myFrameWork.click(btnSubmitReview);
+
+    }
+
+    public boolean checkTheReviewMessageIsAppeared(){
+
+        return myFrameWork.getText(reviewMessage).contains(Utils.Constants.REVIEW_MESSAGE);
+
+    }
 
 }

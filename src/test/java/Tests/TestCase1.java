@@ -3,6 +3,7 @@ package Tests;
 import MyFrameWork.SeleniumFrameWork;
 import Pages.*;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -35,6 +36,8 @@ import java.io.IOException;
 18. Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
  */
 
+@Epic("Automation Exercise Website")
+@Feature("User Account Management")
 public class TestCase1 extends BrowserManager {
 
     WebDriver driver;
@@ -58,6 +61,9 @@ public class TestCase1 extends BrowserManager {
     }
 
     @Test
+    @Story("Register a new user successfully")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("This test verifies that a new user can register, create an account, and then delete the account")
     public void testRegisterUser() {
 
         signUpLogInPage = homePage.clickSignUp_LogIn();

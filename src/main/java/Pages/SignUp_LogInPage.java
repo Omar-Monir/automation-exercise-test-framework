@@ -90,9 +90,17 @@ public class SignUp_LogInPage {
 
     }
 
-    public HomePage logInWithValidEmailAndPassword(){
+    public void signUpWithRealEmail(){
 
-        myFrameWork.sendKeys(logInEmail,Utils.Constants.VALID_EMAIL);
+        myFrameWork.sendKeys(name, Utils.Constants.VALID_NAME);
+        myFrameWork.sendKeys(signUpEmail,Utils.Constants.REAL_EMAIL);
+        myFrameWork.click(btnSignUp);
+
+    }
+
+    public HomePage logInWithRealEmailAndPassword(){
+
+        myFrameWork.sendKeys(logInEmail,Utils.Constants.REAL_EMAIL);
         myFrameWork.sendKeys(password,Utils.Constants.VALID_PASSWORD);
         myFrameWork.click(btnLogIn);
         return new HomePage(driver);

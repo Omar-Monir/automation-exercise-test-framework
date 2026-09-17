@@ -5,6 +5,7 @@ import MyFrameWork.SeleniumFrameWork;
 import Pages.CartPage;
 import Pages.HomePage;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -23,6 +24,8 @@ import java.io.IOException;
 8. Verify success message 'You have been successfully subscribed!' is visible
  */
 
+@Epic("Automation Exercise Website")
+@Feature("Subscription")
 public class TestCase11 extends BrowserManager {
 
     WebDriver driver;
@@ -42,6 +45,9 @@ public class TestCase11 extends BrowserManager {
     }
 
     @Test
+    @Story("Subscribe from Cart page")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that the user can subscribe to the newsletter from the Cart page footer")
     public void testSubscriptionInCartPage(){
 
         cartPage = homePage.clickCartPage();
@@ -60,4 +66,5 @@ public class TestCase11 extends BrowserManager {
         myFrameWork.closeBrowser();
 
     }
+
 }

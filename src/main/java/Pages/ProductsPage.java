@@ -57,10 +57,19 @@ public class ProductsPage {
     WebElement btnContinue;
 
     @FindBy (css = "img[src='/get_product_picture/1']")
-    WebElement imgFirstProduct;
+    WebElement imgBlueTopProduct;
 
     @FindBy (css = "img[src='/get_product_picture/2']")
     WebElement imgSecondProduct;
+
+    @FindBy(css = "[href='/product_details/3']")
+    WebElement btnSleeveLessDreesViewProduct;
+
+    @FindBy (css = "[src='/get_product_picture/3']")
+    WebElement imgSleeveLessDrees;
+
+    @FindBy (css = " div[class='overlay-content'] a[data-product-id='3']")
+    WebElement btnSleeveLessDreesAddToCart;
 
 
     public boolean verifyThatAllProductsPageIsVisibleSuccessfully(){
@@ -84,6 +93,14 @@ public class ProductsPage {
 
     }
 
+    public ProductDetailsPage clickViewSleeveLessDreesProduct(){
+
+        myFrameWork.scrollToElement(btnSleeveLessDreesViewProduct);
+        myFrameWork.click(btnSleeveLessDreesViewProduct);
+        return new ProductDetailsPage(driver);
+
+    }
+
     public void scrollTo4thProduct(){
 
         myFrameWork.scrollToElement(lnkView4thProduct);
@@ -97,10 +114,11 @@ public class ProductsPage {
 
     }
 
-    public void clickAddFirstProductToCart(){
+    public void clickAddImgSleeveLessDreesProductToCart(){
 
-        myFrameWork.hoverOverElement(imgFirstProduct);
-        myFrameWork.click(btnFirstAddToCart);
+        myFrameWork.scrollToElement(btnSleeveLessDreesViewProduct);
+        myFrameWork.hoverOverElement(imgSleeveLessDrees);
+        myFrameWork.click(btnSleeveLessDreesAddToCart);
 
 
     }

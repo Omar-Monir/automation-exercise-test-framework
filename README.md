@@ -2,34 +2,34 @@
 
 This is my personal Selenium automation project for the website [Automation Exercise](https://www.automationexercise.com/).
 
-I built this framework to practice real-world test automation using Java, Selenium, TestNG, and the Page Object Model.
+I built this framework to practice real-world test automation using Java, Selenium, TestNG, Page Object Model, and Allure Report.
 
 ---
 
-## What I Used
+## Tech Stack
 
 - Java
 - Selenium WebDriver
 - TestNG
 - Maven
 - Page Object Model (POM)
+- Allure Report
 - WebDriverManager
 
 ---
 
 ## Project Structure
 
----
-
-## Project Structure
-```src/
+```
+src/
 ├── main/java/
 │   ├── BrowserManager/     → Browser setup
 │   ├── MyFrameWork/        → Reusable methods
 │   ├── Pages/              → Page classes
 │   └── Utilities/          → Constants and helpers
-└── test/java/
-└── Tests/              → Test cases
+├── test/java/
+│   └── Tests/              → Test cases
+└── Listeners/              → TestNG Listener (for screenshots)
 ```
 
 ---
@@ -37,15 +37,17 @@ I built this framework to practice real-world test automation using Java, Seleni
 ## Features
 
 - Clean Page Object Model design
-- Reusable methods for common actions (click, type, wait, etc.)
+- Reusable methods for common actions (click, type, wait, hover, etc.)
 - Explicit waits
 - Support for multiple browsers (Chrome, Firefox, Edge, Brave)
 - All test data stored in a Constants class (no hardcoding)
 - Clear assertion failure messages
+- Allure Report integration
+- Automatic screenshots on test failure
 
 ---
 
-## Test Cases I Automated
+## Test Cases Automated (26 Test Cases)
 
 | #  | Test Case                                      | Status |
 |----|------------------------------------------------|--------|
@@ -68,6 +70,13 @@ I built this framework to practice real-world test automation using Java, Seleni
 | 17 | Remove Products From Cart                      | Done   |
 | 18 | View Category Products                         | Done   |
 | 19 | View & Cart Brand Products                     | Done   |
+| 20 | Search Products and Verify Cart After Login    | Done   |
+| 21 | Add Review on Product                          | Done   |
+| 22 | Add to Cart from Recommended Items             | Done   |
+| 23 | Verify Address Details in Checkout             | Done   |
+| 24 | Download Invoice after Purchase                | Done   |
+| 25 | Scroll Up using Arrow button                   | Done   |
+| 26 | Scroll Up without Arrow button                 | Done   |
 
 ---
 
@@ -77,16 +86,45 @@ I built this framework to practice real-world test automation using Java, Seleni
 2. Open it in IntelliJ IDEA
 3. Make sure you have Java and Maven installed
 4. Update the browser in `config.properties` if needed
-5. Run any test class, or use:
+5. Run the tests using:
 
-```
-bash
+```bash
 mvn clean test
+```
 
-Author
-Omar Monir
+### Generate Allure Report
 
+After running the tests, generate the report using:
+
+```bash
+allure serve allure-results
+```
+
+---
+
+## Brave Browser Configuration
+
+This project supports running tests on **Brave browser**.
+
+To use Brave:
+
+1. Make sure Brave is installed on your machine.
+2. Open the file `config.properties`
+3. Set the browser name:
+
+```properties
+browserName=brave
+```
+
+The framework will automatically detect Brave and launch it using ChromeDriver.
+
+---
+
+## Author
+
+**Omar Monir**  
 Aspiring Software Tester / SDET
+
 I'm currently learning automation testing and building projects to improve my skills.
 
-GitHub: Omar-Monir
+- GitHub: [Omar-Monir](https://github.com/Omar-Monir)

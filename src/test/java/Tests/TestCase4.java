@@ -4,6 +4,7 @@ import BrowserManager.BrowserManager;
 import MyFrameWork.SeleniumFrameWork;
 import Pages.*;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -26,6 +27,8 @@ import java.io.IOException;
 10. Verify that user is navigated to login page
  */
 
+@Epic("Automation Exercise Website")
+@Feature("User Account Management")
 public class TestCase4 extends BrowserManager {
 
     WebDriver driver;
@@ -46,12 +49,15 @@ public class TestCase4 extends BrowserManager {
     }
 
     @Test
+    @Story("Logout user successfully")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that a logged-in user can logout successfully and is redirected to the login page")
     public void  testLogoutUser(){
 
         signUpLogInPage=homePage.clickSignUp_LogIn();
         Assert.assertTrue(signUpLogInPage.checkLoggingToYourAccountMassageIsVisible(),Utils.Constants
                 .LOGGING_TO_YOUR_ACCOUNT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
-        homePage = signUpLogInPage.logInWithMyEmailAndPassword();
+        homePage = signUpLogInPage.logInWithRealEmailAndPassword();
         Assert.assertTrue(homePage.checkLoggedInAsUserNameIsVisible(),Utils.Constants
                 .LOGGED_IN_AS_USER_NAME_IS_NOT_VISIBLE_SUCCESSFULLY);
         signUpLogInPage=homePage.clickLogOutAccount();

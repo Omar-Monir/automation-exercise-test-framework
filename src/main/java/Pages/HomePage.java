@@ -84,6 +84,24 @@ public class HomePage {
     @FindBy(css = "[href='/category_products/1']")
     WebElement lnkDress;
 
+    @FindBy(css = "[id='recommended-item-carousel'] [data-product-id='4']")
+    WebElement recommendedStylishDress;
+
+    @FindBy(css = "[class='recommended_items'] [class='title text-center']")
+    WebElement recommendedItemsMessage;
+
+    @FindBy (id = "scrollUp")
+    WebElement scrollUp;
+
+    @FindBy (id = "slider-carousel")
+    WebElement sliderCarousel;
+
+    @FindBy(id = "header")
+    WebElement header;
+
+    @FindBy (css = "[href='/logout']")
+    WebElement lnkLogOut;
+
     public boolean verifyThatHomePageIsVisibleSuccessfully() {
 
         return myFrameWork.getCurrentURL().contains(Utils.Constants.BASE_URL);
@@ -113,6 +131,13 @@ public class HomePage {
     public SignUp_LogInPage clickSignUp_LogIn() {
 
         myFrameWork.click(lnkSignUp_LogIn);
+        return new SignUp_LogInPage(driver);
+
+    }
+
+    public SignUp_LogInPage clickLogOut() {
+
+        myFrameWork.click(lnkLogOut);
         return new SignUp_LogInPage(driver);
 
     }
@@ -155,6 +180,18 @@ public class HomePage {
     public void scrollToHomeFooter(){
 
         myFrameWork.scrollToElement(footer);
+
+    }
+
+    public void scrollToHomeHeader(){
+
+        myFrameWork.scrollToElement(header);
+
+    }
+
+    public void scrollToHomeSubscription(){
+
+        myFrameWork.scrollToElement(txtSubscription);
 
     }
 
@@ -201,11 +238,35 @@ public class HomePage {
 
     }
 
+    public boolean checkThatRecommendedItemsAreVisible(){
+
+        return myFrameWork.isElementVisible(recommendedItemsMessage);
+
+    }
+
+    public void clickOnRecommendedItemStylishDress(){
+
+        myFrameWork.click(recommendedStylishDress);
+
+    }
+
     public CategoryPage clickOnTheDress(){
 
         myFrameWork.click(btnWomenPlus);
         myFrameWork.click(lnkDress);
         return new CategoryPage(driver);
+
+    }
+
+    public void clickScrollUp(){
+
+        myFrameWork.click(scrollUp);
+
+    }
+
+    public boolean checkSlider_CarouselText(){
+
+        return myFrameWork.getText(sliderCarousel).contains(Utils.Constants.SLIDER_CAROUSEL_TEXT);
 
     }
 

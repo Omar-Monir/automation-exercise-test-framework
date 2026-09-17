@@ -4,6 +4,7 @@ import BrowserManager.BrowserManager;
 import MyFrameWork.SeleniumFrameWork;
 import Pages.*;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -32,6 +33,8 @@ import java.io.IOException;
 18. Verify 'ACCOUNT DELETED!' and click 'Continue' button
  */
 
+@Epic("Automation Exercise Website")
+@Feature("Checkout & Place Order")
 public class TestCase14 extends BrowserManager {
 
     WebDriver driver;
@@ -59,6 +62,9 @@ public class TestCase14 extends BrowserManager {
     }
 
     @Test
+    @Story("Place Order by registering while checkout")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("This test verifies the complete flow of adding product to cart, registering during checkout, placing the order, and deleting the account")
     public void testPlaceOrder_RegisterWhileCheckout(){
 
         homePage.addProductToCart();
@@ -91,4 +97,5 @@ public class TestCase14 extends BrowserManager {
         myFrameWork.closeBrowser();
 
     }
+
 }

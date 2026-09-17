@@ -4,6 +4,7 @@ import BrowserManager.BrowserManager;
 import MyFrameWork.SeleniumFrameWork;
 import Pages.*;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -24,6 +25,8 @@ import java.io.IOException;
 8. Verify error 'Email Address already exist!' is visible
  */
 
+@Epic("Automation Exercise Website")
+@Feature("User Account Management")
 public class TestCase5 extends BrowserManager {
 
     WebDriver driver;
@@ -45,12 +48,15 @@ public class TestCase5 extends BrowserManager {
 
 
     @Test
+    @Story("Register with existing email")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that the system shows an error when trying to register with an already existing email")
     public void testRegisterWithExistingEmail() {
 
         signUpLogInPage = homePage.clickSignUp_LogIn();
         Assert.assertTrue(signUpLogInPage.checkNewUserSignupMassageIsVisible(),Utils.Constants
                 .NEW_USER_SIGNUP_MASSAGE_IS_NOT_VISIBLE);
-        signUpLogInPage.signUpWithMyEmail();
+        signUpLogInPage.signUpWithRealEmail();
         Assert.assertTrue(signUpLogInPage.checkEmailAddressAlreadyExistMassageIsVisible(),Utils.Constants
                 .EMAIL_ADDRESS_ALREADY_EXIST_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
 

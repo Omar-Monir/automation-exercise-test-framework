@@ -4,6 +4,7 @@ import BrowserManager.BrowserManager;
 import MyFrameWork.SeleniumFrameWork;
 import Pages.*;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -27,6 +28,8 @@ import java.io.IOException;
 11. Click 'Home' button and verify that landed to home page successfully
  */
 
+@Epic("Automation Exercise Website")
+@Feature("Contact Us")
 public class TestCase6 extends BrowserManager {
 
     WebDriver driver;
@@ -47,6 +50,9 @@ public class TestCase6 extends BrowserManager {
     }
 
     @Test
+    @Story("Submit Contact Us form")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that a user can successfully submit the Contact Us form with a file attachment")
     public void testContactUsForm(){
 
         contactUsPage=homePage.clickContactUs();

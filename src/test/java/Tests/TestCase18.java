@@ -5,6 +5,7 @@ import MyFrameWork.SeleniumFrameWork;
 import Pages.CategoryPage;
 import Pages.HomePage;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -23,6 +24,8 @@ import java.io.IOException;
 8. Verify that user is navigated to that category page
  */
 
+@Epic("Automation Exercise Website")
+@Feature("Category")
 public class TestCase18 extends BrowserManager {
 
     WebDriver driver;
@@ -42,6 +45,9 @@ public class TestCase18 extends BrowserManager {
     }
 
     @Test
+    @Story("View Category products")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that the user can view products under different categories (Women and Men)")
     public void testViewCategoryProducts(){
 
         homePage.scrollToFirstProductView();

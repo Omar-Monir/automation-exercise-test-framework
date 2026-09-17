@@ -5,8 +5,8 @@ import MyFrameWork.SeleniumFrameWork;
 import Pages.ProductDetailsPage;
 import Pages.HomePage;
 import Pages.ProductsPage;
-
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -25,7 +25,8 @@ import java.io.IOException;
 8. Verify that detail is visible: product name, category, price, availability, condition, brand
  */
 
-
+@Epic("Automation Exercise Website")
+@Feature("Products")
 public class TestCase8 extends BrowserManager {
 
     WebDriver driver;
@@ -47,6 +48,9 @@ public class TestCase8 extends BrowserManager {
     }
 
     @Test
+    @Story("Verify All Products and Product Details")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that the All Products page and Product Details page are displayed correctly")
     public void testVerifyAllProductsAndProductDetailPage(){
 
         productsPage = homePage.clickProducts();

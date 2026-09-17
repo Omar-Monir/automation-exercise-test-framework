@@ -4,8 +4,8 @@ import BrowserManager.BrowserManager;
 import MyFrameWork.SeleniumFrameWork;
 import Pages.HomePage;
 import Pages.ProductsPage;
-
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -23,6 +23,8 @@ import java.io.IOException;
 7. Verify 'SEARCHED PRODUCTS' is visible
  */
 
+@Epic("Automation Exercise Website")
+@Feature("Products")
 public class TestCase9 extends BrowserManager {
 
     WebDriver driver;
@@ -43,6 +45,9 @@ public class TestCase9 extends BrowserManager {
     }
 
     @Test
+    @Story("Search for a product")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that the user can search for a product and see the searched products results")
     public void testSearchProduct(){
 
         productsPage = homePage.clickProducts();

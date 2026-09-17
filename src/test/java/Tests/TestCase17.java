@@ -5,6 +5,7 @@ import MyFrameWork.SeleniumFrameWork;
 import Pages.CartPage;
 import Pages.HomePage;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -22,6 +23,8 @@ import java.io.IOException;
 7. Click 'X' button corresponding to particular product
  */
 
+@Epic("Automation Exercise Website")
+@Feature("Cart")
 public class TestCase17 extends BrowserManager {
 
     WebDriver driver;
@@ -41,6 +44,9 @@ public class TestCase17 extends BrowserManager {
     }
 
     @Test
+    @Story("Remove product from cart")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that the user can remove a product from the cart successfully")
     public void testRemoveProductsFromCart(){
 
         homePage.addProductToCart();

@@ -6,6 +6,7 @@ import Pages.BrandPage;
 import Pages.HomePage;
 import Pages.ProductsPage;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -24,6 +25,8 @@ import java.io.IOException;
 8. Verify that user is navigated to that brand page and can see products
  */
 
+@Epic("Automation Exercise Website")
+@Feature("Brand")
 public class TestCase19 extends BrowserManager {
 
     WebDriver driver;
@@ -45,6 +48,9 @@ public class TestCase19 extends BrowserManager {
     }
 
     @Test
+    @Story("View Brand products")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that the user can view products under different brands")
     public void testView_CartBrandProducts(){
 
         productsPage = homePage.clickProducts();

@@ -1,0 +1,37 @@
+package Listeners;
+
+import io.qameta.allure.Attachment;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
+public class TestListener implements ITestListener {
+
+    @Override
+    public void onTestFailure(ITestResult result) {
+        Object testClass = result.getInstance();
+        WebDriver driver = null;
+
+        try {
+            // Try to get the driver from the test class
+            driver = (WebDriver) result.getTestClass()
+                    .getRealClass()
+                    .getDeclaredField("driver")
+                    .get(testClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (driver != null) {
+            saveScreenshot(driver);
+        }
+    }
+
+    @Attachment(value = "Screenshot on Failure", type = "image/png")
+    public byte[] saveScreenshot(WebDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+}

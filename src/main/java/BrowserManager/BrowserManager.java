@@ -46,6 +46,15 @@ public class BrowserManager {
                 options.setBinary("C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe");
 
                 Map<String, Object> prefs = new HashMap<>();
+
+                // ===== Disable download popup =====
+                prefs.put("download.default_directory", System.getProperty("user.home") + "\\Downloads");
+                prefs.put("download.prompt_for_download", false);          // Important
+                prefs.put("download.directory_upgrade", true);
+                prefs.put("safebrowsing.enabled", true);
+                prefs.put("profile.default_content_settings.popups", 0);
+
+                options.setExperimentalOption("prefs", prefs);
                 prefs.put("autofill.profile_enabled", false);
                 prefs.put("autofill.credit_card_enabled", false);
                 prefs.put("credentials_enable_service", false);

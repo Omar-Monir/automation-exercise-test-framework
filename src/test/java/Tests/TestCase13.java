@@ -7,6 +7,7 @@ import Pages.HomePage;
 import Pages.ProductDetailsPage;
 import Pages.ProductsPage;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -26,6 +27,8 @@ import java.io.IOException;
 9. Verify that product is displayed in cart page with exact quantity
  */
 
+@Epic("Automation Exercise Website")
+@Feature("Cart")
 public class TestCase13 extends BrowserManager {
 
     WebDriver driver;
@@ -50,6 +53,9 @@ public class TestCase13 extends BrowserManager {
     }
 
     @Test
+    @Story("Verify product quantity in cart")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that the product quantity selected on the product details page is correctly reflected in the cart")
     public void testProductQuantityInCart(){
 
         productsPage = homePage.clickProducts();

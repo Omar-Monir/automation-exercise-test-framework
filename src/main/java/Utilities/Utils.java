@@ -24,7 +24,7 @@ public class Utils {
         public static final String MY_EMAIL = "softwaretester@example.com";
         //  Test Data - Valid User
         public static final String VALID_NAME = "Software";
-        public static final String VALID_EMAIL = "software.test@example.com";
+        public static final String REAL_EMAIL = "software.test@example.com";
         public static final String VALID_PASSWORD = "Test@12345";
 
         // Test Data - Invalid User
@@ -100,6 +100,13 @@ public class Utils {
                 = "SEARCHED PRODUCTS";
         public static final String ORDER_PLACED_SUCCESSFULLY_MASSAGE
                 = "Your order has been placed successfully!";
+        public static final String WRITE_YOUR_REVIEW_TEXT
+                = "WRITE YOUR REVIEW";
+        public static final String REVIEW_MESSAGE
+                = "Thank you for your review.";
+        public static final String SLIDER_CAROUSEL_TEXT
+                = "Full-Fledged practice website for Automation Engineers";
+
 
         //Assertion fail messages
         public static final String HOME_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY
@@ -164,6 +171,27 @@ public class Utils {
                 ="BRAND IS NOT VISIBLE SUCCESSFULLY";
         public static final String BRAND_PAGE_IS_NOT_VISIBLE_SUCCESSFULLY
                 ="BRAND PAGE IS NOT VISIBLE SUCCESSFULLY";
+        public static final String SEARCHED_PRODUCTS_MESSAGE_IS_NOT_VISIBLE =
+                "SEARCHED PRODUCTS MESSAGE IS NOT VISIBLE";
+        public static final String SLEEVE_LESS_PRODUCT_IS_NOT_ADDED_SUCCESSFULLY
+                ="SLEEVE LESS PRODUCT IS NOT ADDED SUCCESSFULLY";
+        public static final String STYLISH_DREES_PRODUCT_IS_NOT_ADDED_SUCCESSFULLY
+                ="STYLISH DREES PRODUCT IS NOT ADDED SUCCESSFULLY";
+        public static final String WRITE_YOUR_REVIEW_IS_NOT_VISIBLE_SUCCESSFULLY
+                = "WRITE YOUR REVIEW IS NOT VISIBLE SUCCESSFULLY";
+        public static final String REVIEW_MESSAGE_NOT_APPEARED
+                = "REVIEW MESSAGE NOT APPEARED";
+        public static final String RECOMMENDED_ITEMS_ARE_NOT_APPEARED
+                = "RECOMMENDED ITEMS ARE NOT APPEARED";
+        public static final String THE_DELIVERY_ADDRESS_IS_NOT_SIMILAR_TO_REGISTERED_ADDRESS
+                = "THE DELIVERY ADDRESS IS NOT SIMILAR TO REGISTERED ADDRESS";
+        public static final String THE_BILLING_ADDRESS_IS_NOT_SIMILAR_TO_REGISTERED_ADDRESS
+                = "THE BILLING ADDRESS IS NOT SIMILAR TO REGISTERED ADDRESS";
+        public static final String INVOICE_WAS_NOT_DOWNLOADED_SUCCESSFULLY
+                = "INVOICE WAS NOT DOWNLOADED SUCCESSFULLY";
+        public static final String SLIDER_CAROUSEL_TEXT_NO_CORRECT
+                = "SLIDER CAROUSEL TEXT IS NOT CORRECT";
+
 
 
 
@@ -173,6 +201,10 @@ public class Utils {
         public static final String SEARCH_PRODUCT = "DRESS";
         public static final String QUANTITY = "4";
         public static final String CHECK_OUT_COMMENT = "This is a gift, kindly wrap it nicely.";
+        public static final String REVIEW
+                = "I purchased this dress for a casual outing, and it turned out better than expected.";
+        public static final String DOWNLOAD_PATH = System.getProperty("user.home") + File.separator + "Downloads";
+        public static final String INVOICE_FILE_NAME = "invoice.txt";   // Change this after checking the real file name
     }
 
     // Make time dependant E-mail
@@ -226,6 +258,22 @@ public class Utils {
 
         return data;
 
+    }
+
+    public static boolean isFileDownloaded() throws InterruptedException {
+        File file = new File(Constants.DOWNLOAD_PATH + File.separator + Constants.INVOICE_FILE_NAME);
+
+        int timeout = 20; // seconds
+        while (timeout > 0) {
+            if (file.exists()) {
+                System.out.println("File downloaded successfully: " + Constants.INVOICE_FILE_NAME);
+                return true;
+            }
+            Thread.sleep(1000);
+            timeout--;
+        }
+        System.out.println("File not found: " + Constants.INVOICE_FILE_NAME);
+        return false;
     }
 
 }

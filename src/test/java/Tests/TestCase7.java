@@ -4,6 +4,7 @@ import BrowserManager.BrowserManager;
 import MyFrameWork.SeleniumFrameWork;
 import Pages.*;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -19,7 +20,8 @@ import java.io.IOException;
 5. Verify user is navigated to test cases page successfully
  */
 
-
+@Epic("Automation Exercise Website")
+@Feature("Navigation")
 public class TestCase7 extends BrowserManager {
 
     WebDriver driver;
@@ -40,6 +42,9 @@ public class TestCase7 extends BrowserManager {
     }
 
     @Test
+    @Story("Verify Test Cases page")
+    @Severity(SeverityLevel.MINOR)
+    @Description("This test verifies that the user can navigate to the Test Cases page successfully")
     public void testVerifyTestCasesPage(){
 
         testCasesPage = homePage.clickTestCasesPage();

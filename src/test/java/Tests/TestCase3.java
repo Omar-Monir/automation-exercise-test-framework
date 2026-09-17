@@ -5,6 +5,7 @@ import MyFrameWork.SeleniumFrameWork;
 import Pages.HomePage;
 import Pages.SignUp_LogInPage;
 import Utilities.Utils;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -25,7 +26,8 @@ import java.io.IOException;
 8. Verify error 'Your email or password is incorrect!' is visible
  */
 
-
+@Epic("Automation Exercise Website")
+@Feature("User Account Management")
 public class TestCase3 extends BrowserManager {
 
     WebDriver driver;
@@ -46,6 +48,9 @@ public class TestCase3 extends BrowserManager {
     }
 
     @Test
+    @Story("Login with incorrect email and password")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("This test verifies that the system shows an error message when user tries to login with invalid credentials")
     public void testLoginUserWithIncorrectEmailAndPassword(){
 
         signUpLogInPage=homePage.clickSignUp_LogIn();

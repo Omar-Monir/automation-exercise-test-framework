@@ -1,0 +1,42 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Automation Exercise Test Suite" verbose="1" parallel="false">
+
+    <listeners>
+        <listener class-name="Listeners.TestListener"/>
+    </listeners>
+
+    <test name="Automation Exercise Full Regression">
+        <classes>
+
+            <class name="Tests.TestCase1"/>
+            <class name="Tests.TestCase2"/>
+            <class name="Tests.TestCase3"/>
+            <class name="Tests.TestCase4"/>
+            <class name="Tests.TestCase5"/>
+            <class name="Tests.TestCase6"/>
+            <class name="Tests.TestCase7"/>
+            <class name="Tests.TestCase8"/>
+            <class name="Tests.TestCase9"/>
+            <class name="Tests.TestCase10"/>
+            <class name="Tests.TestCase11"/>
+            <class name="Tests.TestCase12"/>
+            <class name="Tests.TestCase13"/>
+            <class name="Tests.TestCase14"/>
+            <class name="Tests.TestCase15"/>
+            <class name="Tests.TestCase16"/>
+            <class name="Tests.TestCase17"/>
+            <class name="Tests.TestCase18"/>
+            <class name="Tests.TestCase19"/>
+            <class name="Tests.TestCase20"/>
+            <class name="Tests.TestCase21"/>
+            <class name="Tests.TestCase22"/>
+            <class name="Tests.TestCase23"/>
+            <class name="Tests.TestCase24"/>
+            <class name="Tests.TestCase25"/>
+            <class name="Tests.TestCase26"/>
+
+        </classes>
+    </test>
+
+</suite>

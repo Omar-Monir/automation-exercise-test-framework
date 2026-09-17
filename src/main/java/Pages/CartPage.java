@@ -53,6 +53,18 @@ public class CartPage {
     @FindBy(css = "[class='cart_quantity_delete']")
     WebElement btnDeleteProduct;
 
+    @FindBy(css = "a[href='/login']")
+    WebElement lnkSignUp_LogIn;
+
+    @FindBy(id = "product-3")
+    WebElement sleeveLessAdded;
+
+    @FindBy(css = "[href='/product_details/4']")
+    WebElement StylishDress;
+
+    @FindBy(css = "[class='text-center'] [href='/login']")
+    WebElement lnkRegisterLogin;
+
     public void clickXButton(){
 
         myFrameWork.click(btnDeleteProduct);
@@ -105,6 +117,18 @@ public class CartPage {
 
     }
 
+    public boolean checkSleeveLessProductIsAdded(){
+
+        return myFrameWork.isElementVisible(sleeveLessAdded);
+
+    }
+
+    public boolean checkStylishDressProductIsAdded(){
+
+        return myFrameWork.isElementVisible(StylishDress);
+
+    }
+
     public boolean checkSecondProductIsAdded(){
 
         return myFrameWork.isElementVisible(lstSecondProduct);
@@ -120,6 +144,20 @@ public class CartPage {
     public boolean userIsInCartPage(){
 
         return myFrameWork.getCurrentURL().contains(Utils.Constants.CART_PAGE_URL);
+
+    }
+
+    public SignUp_LogInPage clickSignUp_LogIn() {
+
+        myFrameWork.click(lnkSignUp_LogIn);
+        return new SignUp_LogInPage(driver);
+
+    }
+
+    public SignUp_LogInPage clickLinkRegister_LogIn() {
+
+        myFrameWork.click(lnkRegisterLogin);
+        return new SignUp_LogInPage(driver);
 
     }
 
