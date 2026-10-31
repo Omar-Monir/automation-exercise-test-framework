@@ -30,7 +30,7 @@ src/
 │   └── Listeners/          → TestNG listener (screenshot on failure)
 ├── test/java/
 │   └── Tests/              → Test classes
-└── docs/                   → Report screenshots used in this README
+└── docs/                   → Report screenshot and test design document
 ```
 
 ---
@@ -132,6 +132,17 @@ options.setBinary("C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\
 ```
 
 If Brave is installed somewhere else, change that line, or set `browserName` to `chrome`, `edge`, or `firefox` to use another browser. (Only `brave` has been run against the full suite.)
+
+---
+
+## Test Design
+
+The registration form is documented as a manual test design artifact: 38 test
+cases built with equivalence partitioning, boundary value analysis, a decision
+table and state transitions, plus the HTML evidence that decides which inputs are
+worth testing at all.
+
+[docs/test-design.md](docs/test-design.md)
 
 ---
 
