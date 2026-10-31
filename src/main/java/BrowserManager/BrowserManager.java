@@ -33,12 +33,33 @@ public class BrowserManager {
 
     }
 
+    private static boolean isHeadless() {
+        return Boolean.parseBoolean(System.getenv().getOrDefault("HEADLESS", "false"));
+    }
+
+    private static ChromeOptions chromeOptions() {
+        ChromeOptions options = new ChromeOptions();
+        if (isHeadless()) {
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--window-size=1920,1080");
+        }
+        return options;
+    }
+
     public static WebDriver openBrowserAndURL(String browserName){
 
+        // Allow CI (or any shell) to override the browser without editing config.properties
+        String envBrowser = System.getenv("BROWSER");
+        if (envBrowser != null && !envBrowser.isBlank()) {
+            browserName = envBrowser.trim().toLowerCase();
+        }
+
         switch (browserName) {
-            case "chrome" -> driver = new ChromeDriver();
+            case "chrome" -> driver = new ChromeDriver(chromeOptions());
             case "edge" -> driver = new EdgeDriver();
-            case "fire fox" -> driver = new FirefoxDriver();
+            case "firefox", "fire fox" -> driver = new FirefoxDriver();
             case "safari" -> driver = new SafariDriver();
             case "brave" -> {
                 System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
@@ -69,7 +90,9 @@ public class BrowserManager {
 
         }
 
-        driver.manage().window().maximize();
+        if (!isHeadless()) {
+            driver.manage().window().maximize();
+        }
         driver.navigate().to(properties.getProperty("URL"));
         return driver;
     }

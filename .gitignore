@@ -58,3 +58,14 @@ logs/
 *.ear
 *.db
 *.sqlite
+
+# ====================== Allure ======================
+allure-results/
+allure-report/
+
+# ====================== Drivers (per-machine, never committed) ======================
+drivers/
+
+# ====================== Scratch files ======================
+file/
+body.json
