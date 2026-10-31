@@ -48,11 +48,12 @@ jobs:
             [ -e "$f" ] || continue
             echo "#### $(basename "$f")" >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
-            head -40 "$f" >> "$GITHUB_STEP_SUMMARY"
+            head -60 "$f" >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
           done
-          grep -h -E "^Tests run:" target/surefire-reports/*.txt 2>/dev/null \
-            | grep -E "Failures: [1-9]|Errors: [1-9]" | head -5 | sed 's/^/::error::/' || true
+          grep -h -E "Tests run:" target/surefire-reports/*.txt 2>/dev/null | tail -1 | while IFS= read -r l; do echo "::error::$l"; done
+          grep -h -E "<<< (FAILURE|ERROR)!" target/surefire-reports/*.txt 2>/dev/null | head -5 | while IFS= read -r l; do echo "::error::$l"; done
+          grep -h -E "^(java\.lang\.|org\.openqa\.|org\.testng\.)" target/surefire-reports/*.txt 2>/dev/null | head -5 | while IFS= read -r l; do echo "::error::$l"; done
 
       - name: Upload Allure results
         if: always()
