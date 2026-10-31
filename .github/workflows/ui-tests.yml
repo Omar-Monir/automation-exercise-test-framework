@@ -34,7 +34,25 @@ jobs:
         env:
           BROWSER: chrome
           HEADLESS: "true"
-        run: mvn -B test -Dtest=TestCase7,TestCase8,TestCase9
+        # The target site is a third-party live site, so a single element can be
+        # slow or missing on a shared runner. Retry a failed test up to twice
+        # before failing the build, instead of reporting a product bug that is
+        # actually network/timing noise.
+        run: mvn -B test -Dtest=TestCase7,TestCase8,TestCase9 -Dsurefire.rerunFailingTestsCount=2
+
+      - name: Show failure details
+        if: failure()
+        run: |
+          echo "### Surefire results" >> "$GITHUB_STEP_SUMMARY"
+          for f in target/surefire-reports/*.txt; do
+            [ -e "$f" ] || continue
+            echo "#### $(basename "$f")" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            head -40 "$f" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          done
+          grep -h -E "^Tests run:" target/surefire-reports/*.txt 2>/dev/null \
+            | grep -E "Failures: [1-9]|Errors: [1-9]" | head -5 | sed 's/^/::error::/' || true
 
       - name: Upload Allure results
         if: always()
