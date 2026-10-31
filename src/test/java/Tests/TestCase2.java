@@ -38,6 +38,7 @@ public class TestCase2 extends BrowserManager {
     AccountDeletedPage accountDeletedPage;
     EnterAccountInformation enterAccountInformation;
     AccountCreatedPage accountCreatedPage;
+    String email;
 
     @BeforeMethod
     public void startUp() throws IOException {
@@ -58,13 +59,16 @@ public class TestCase2 extends BrowserManager {
     public void testLogInUserWithCorrectEmailAndPassword(){
 
         signUpLogInPage=homePage.clickSignUp_LogIn();
-        enterAccountInformation = signUpLogInPage.signUpWithMyEmail();
+        // Use a unique email so the test can run repeatedly against the live site.
+        // A hardcoded email fails with "Email Address already exist!" on the second run.
+        email = Utils.generateEmailWithTimeStamp();
+        enterAccountInformation = signUpLogInPage.signUpWithEmail(email);
         accountCreatedPage = enterAccountInformation.createAccount();
         homePage = accountCreatedPage.clickContinueButton();
         signUpLogInPage = homePage.clickLogOut();
         Assert.assertTrue(signUpLogInPage.checkLoggingToYourAccountMassageIsVisible(),Utils.Constants
                 .LOGGING_TO_YOUR_ACCOUNT_MASSAGE_IS_NOT_VISIBLE_SUCCESSFULLY);
-        homePage=signUpLogInPage.logInWithMyEmailAndPassword();
+        homePage=signUpLogInPage.logInWithEmailAndPassword(email, Utils.Constants.VALID_PASSWORD);
         Assert.assertTrue( homePage.checkLoggedInAsUserNameIsVisible(),Utils.Constants
                 .LOGGED_IN_AS_USER_NAME_IS_NOT_VISIBLE_SUCCESSFULLY);
         accountDeletedPage=homePage.clickDeleteAccount();

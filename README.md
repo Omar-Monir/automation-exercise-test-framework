@@ -8,13 +8,13 @@ I built this framework to practice real-world test automation using Java, Seleni
 
 ## Tech Stack
 
-- Java
+- Java 25
 - Selenium WebDriver
 - TestNG
 - Maven
 - Page Object Model (POM)
 - Allure Report
-- WebDriverManager
+- Selenium Manager (resolves the browser driver automatically — no manual driver download)
 
 ---
 
@@ -44,6 +44,8 @@ src/
 - Clear assertion failure messages
 - Allure Report integration
 - Automatic screenshots on test failure
+- No driver files in the repository: Selenium Manager downloads the right driver for your installed browser version, so the suite keeps working after browser updates
+- Timestamped test accounts, so the tests can be re-run against the live site without cleanup
 
 ---
 
@@ -84,13 +86,15 @@ src/
 
 1. Clone the repository
 2. Open it in IntelliJ IDEA
-3. Make sure you have Java and Maven installed
-4. Update the browser in `config.properties` if needed
+3. Make sure you have **JDK 25** and **Maven** installed
+4. Make sure the browser in `config.properties` is installed on your machine
 5. Run the tests using:
 
 ```bash
 mvn clean test
 ```
+
+You do **not** need to download a WebDriver. Selenium Manager checks your installed browser version and fetches the matching driver on the first run (an internet connection is needed the first time, and again after a browser update).
 
 ### Generate Allure Report
 
@@ -116,7 +120,13 @@ To use Brave:
 browserName=brave
 ```
 
-The framework will automatically detect Brave and launch it using ChromeDriver.
+The framework launches Brave through ChromeDriver. Selenium Manager uses the Brave installation path set in `BrowserManager.java`, so that path must match where Brave is installed on your machine:
+
+```java
+options.setBinary("C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe");
+```
+
+If Brave is installed somewhere else, change that line, or set `browserName` to `chrome`, `edge`, or `firefox` to use another browser. (Only `brave` has been run against the full suite.)
 
 ---
 

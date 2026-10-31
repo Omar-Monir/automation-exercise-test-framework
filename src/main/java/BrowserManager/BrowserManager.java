@@ -62,7 +62,6 @@ public class BrowserManager {
             case "firefox", "fire fox" -> driver = new FirefoxDriver();
             case "safari" -> driver = new SafariDriver();
             case "brave" -> {
-                System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.setBinary("C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe");
 

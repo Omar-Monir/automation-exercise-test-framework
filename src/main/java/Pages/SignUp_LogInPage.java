@@ -81,10 +81,10 @@ public class SignUp_LogInPage {
 
     }
 
-    public EnterAccountInformation signUpWithMyEmail(){
+    public EnterAccountInformation signUpWithEmail(String email){
 
         myFrameWork.sendKeys(name, Utils.Constants.VALID_NAME);
-        myFrameWork.sendKeys(signUpEmail,Utils.Constants.MY_EMAIL);
+        myFrameWork.sendKeys(signUpEmail,email);
         myFrameWork.click(btnSignUp);
         return new EnterAccountInformation(driver);
 
@@ -121,10 +121,10 @@ public class SignUp_LogInPage {
 
     }
 
-    public HomePage logInWithMyEmailAndPassword(){
+    public HomePage logInWithEmailAndPassword(String email, String passwordValue){
 
-        myFrameWork.sendKeys(logInEmail,Utils.Constants.MY_EMAIL);
-        myFrameWork.sendKeys(password,Utils.Constants.VALID_PASSWORD);
+        myFrameWork.sendKeys(logInEmail,email);
+        myFrameWork.sendKeys(password,passwordValue);
         myFrameWork.click(btnLogIn);
         return new HomePage(driver);
 

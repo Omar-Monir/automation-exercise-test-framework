@@ -89,8 +89,15 @@ public class SeleniumFrameWork {
     }
 
     // Get text from element
+    // Retries while the page is still re-rendering, because a visible element can become
+    // stale between the wait and the getText() call (StaleElementReferenceException).
     public String getText(WebElement element) {
-        String text = explicitWait.until(ExpectedConditions.visibilityOf(element)).getText();
+        String text = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(DEFAULT_TIMEOUT))
+                .pollingEvery(Duration.ofMillis(200))
+                .ignoring(StaleElementReferenceException.class)
+                .ignoring(NoSuchElementException.class)
+                .until(d -> element.isDisplayed() ? element.getText() : null);
         System.out.println("Got text from element " + element + ": " + text);
         return text;
     }
