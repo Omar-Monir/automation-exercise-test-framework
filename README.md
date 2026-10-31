@@ -26,10 +26,11 @@ src/
 │   ├── BrowserManager/     → Browser setup
 │   ├── MyFrameWork/        → Reusable methods
 │   ├── Pages/              → Page classes
-│   └── Utilities/          → Constants and helpers
+│   ├── Utilities/          → Constants and helpers
+│   └── Listeners/          → TestNG listener (screenshot on failure)
 ├── test/java/
-│   └── Tests/              → Test cases
-└── Listeners/              → TestNG Listener (for screenshots)
+│   └── Tests/              → Test classes
+└── docs/                   → Report screenshots used in this README
 ```
 
 ---
@@ -39,7 +40,7 @@ src/
 - Clean Page Object Model design
 - Reusable methods for common actions (click, type, wait, hover, etc.)
 - Explicit waits
-- Support for multiple browsers (Chrome, Firefox, Edge, Brave)
+- Configurable browsers: Chrome, Edge, Firefox, and Brave (Brave verified end-to-end)
 - All test data stored in a Constants class (no hardcoding)
 - Clear assertion failure messages
 - Allure Report integration
@@ -104,6 +105,10 @@ After running the tests, generate the report using:
 allure serve allure-results
 ```
 
+Current status: 26 of 26 tests passing, full suite runs in about 12 minutes.
+
+![Allure report](docs/allure-report.png)
+
 ---
 
 ## Brave Browser Configuration
@@ -130,11 +135,19 @@ If Brave is installed somewhere else, change that line, or set `browserName` to 
 
 ---
 
+## Known limitations
+
+- Tests run against the live public site, so results depend on the internet and on the site staying unchanged.
+- Only Brave has been run against the full suite; the other browsers are configured but not verified.
+- The suite takes about 12 minutes because each test starts its own browser session.
+
+---
+
 ## Author
 
-**Omar Monir**  
-Aspiring Software Tester / SDET
-
-I'm currently learning automation testing and building projects to improve my skills.
+**Omar Monir**
+Junior QA Automation Engineer
 
 - GitHub: [Omar-Monir](https://github.com/Omar-Monir)
+- LinkedIn: [omar-monir](https://linkedin.com/in/omar-monir-7191722b0)
+- Email: omonir446@gmail.com

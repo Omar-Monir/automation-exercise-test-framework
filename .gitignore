@@ -56,6 +56,11 @@ logs/
 *.jpg
 *.html
 
+# Documentation images (README screenshots) ARE tracked - exception to the
+# rules above. Keep the README's ![Allure report](docs/allure-report.png) working.
+!docs/*.png
+!docs/*.jpg
+
 # ====================== Others ======================
 *.class
 *.jar
