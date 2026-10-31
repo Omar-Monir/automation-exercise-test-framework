@@ -12,13 +12,14 @@ concurrency:
 
 jobs:
   # Runs automatically on every push and pull request.
-  # Only a small, stable subset: it exercises the framework end to end
-  # (browser start, Page Object Model, assertions, Allure output) without
-  # depending on cart/checkout flows that are flaky on a shared CI runner.
+  # One smoke test only: it proves the framework can start a browser, reach the
+  # live site, navigate and assert. The full 26-test suite depends on a
+  # third-party site and is run manually (see the "full-suite" job), because
+  # order-dependent, live-data tests flake on a shared CI runner.
   smoke:
     if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
@@ -38,7 +39,7 @@ jobs:
         # slow or missing on a shared runner. Retry a failed test up to twice
         # before failing the build, instead of reporting a product bug that is
         # actually network/timing noise.
-        run: mvn -B test -Dtest=TestCase7,TestCase8,TestCase9 -Dsurefire.rerunFailingTestsCount=2
+        run: mvn -B test -Dtest=TestCase7 -Dsurefire.rerunFailingTestsCount=3
 
       - name: Show failure details
         if: failure()

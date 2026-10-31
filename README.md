@@ -151,6 +151,7 @@ worth testing at all.
 - Tests run against the live public site, so results depend on the internet and on the site staying unchanged.
 - Only Brave has been run against the full suite; the other browsers are configured but not verified.
 - The suite takes about 12 minutes because each test starts its own browser session.
+- CI (GitHub Actions) runs one smoke test on every push. The full 26-test suite is triggered manually from the Actions tab, because tests that depend on live third-party data are not reliable on a shared runner.
 
 ---
 
