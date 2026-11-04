@@ -81,7 +81,7 @@ A registration "pass" that cannot log in later is meaningless.
 | TD-SU-06 | Email without `@` | `omartest.example.com` | Browser rejects the format; if the request is forced, the server must also reject it | Equivalence (malformed) | [verify] |
 | TD-SU-07 | Email without a domain | `omar@` | Rejected by browser and server | Equivalence (malformed) | [verify] |
 | TD-SU-08 | Email with spaces | `omar test@example.com` | Rejected — a space is not legal in the local part | Equivalence (malformed) | [verify] |
-| TD-SU-09 | Email in uppercase | `OMAR.TD.<timestamp>@EXAMPLE.COM` | Treated as the same address as lowercase; if a duplicate in different case is accepted, that is a defect (case-sensitive uniqueness) | Equivalence (case) | [verify] |
+| TD-SU-09 | Email in uppercase | `OMAR.TD.<timestamp>@EXAMPLE.COM` | Treated as the same address as lowercase; if a duplicate in different case is accepted, that is a defect (case-sensitive uniqueness) | Equivalence (case) | Pass - 2026-11-04 |
 | TD-SU-10 | Name with leading and trailing spaces | `   Omar Test   ` | Accepted; stored value must be trimmed (check the confirmation page and later the account details page) | Equivalence (whitespace) | [verify] |
 | TD-SU-11 | Name with special characters | `O$mar <Test> ' "` | Accepted and displayed literally — no HTML injection, no truncation, no 500 error | Equivalence (special) | [verify] |
 | TD-SU-12 | Name at length extremes | 1 char / 100 chars / 1000 chars | 1 and 100 accepted, 1000 either rejected with a clear message or truncated consistently; a server error is a defect | Boundary | [verify] |
@@ -100,7 +100,7 @@ Reached only after a successful step in Section A.
 | TD-SU-16 | Password at length extremes | 1 char / 500 chars | 1 char accepted or rejected by an explicit rule, never silently; 500 either rejected with a message or hashed and accepted | Boundary | [verify] |
 | TD-SU-17 | Password with only spaces | `      ` | Rejected, or accepted as a literal password — must not be treated as empty while logged in as whitespace | Equivalence | [verify] |
 | TD-SU-18 | Date of birth day boundaries | Day = 1 and Day = 31 | Accepted for a month with 31 days | Boundary | [verify] |
-| TD-SU-19 | Impossible date — 31 February | Month = February, Day = 31 | Rejected with a validation message; if accepted, that is a defect (invalid date stored) | Boundary / decision table | [verify] |
+| TD-SU-19 | Impossible date - 31 February | Month = February, Day = 31 | Rejected with a validation message; if accepted, that is a defect (invalid date stored) | Boundary / decision table | Fail - Issue #1 |
 | TD-SU-20 | Date of birth in the future | Year = 2026, current month | Rejected, or accepted because the site does not validate age — behaviour must be recorded | Boundary | [verify] |
 | TD-SU-21 | Date of birth at the earliest selectable year | Lowest year in the dropdown | Accepted (a very old user is still a valid user) | Boundary | [verify] |
 | TD-SU-22 | Newsletter and offers checkboxes unchecked | Both unchecked | Registration succeeds; user is not subscribed | Equivalence | [verify] |
@@ -110,7 +110,7 @@ Reached only after a successful step in Section A.
 | TD-SU-26 | Country not selected | Country = default empty option | Blocked, or a default country saved — must be consistent and documented | Equivalence | [verify] |
 | TD-SU-27 | All dropdown options selectable | Each Country option | Every option can be saved and is displayed correctly on the confirmation page | Equivalence (partition per option) | [verify] |
 | TD-SU-28 | Zip code with letters | `ABCDE` | Accepted (Egyptian and UK postcodes contain letters) | Equivalence | [verify] |
-| TD-SU-29 | Mobile number with letters or symbols | `abc@@@` | Rejected with a validation message — most likely defect area, since the field has no format constraint in the markup | Equivalence | [verify] |
+| TD-SU-29 | Mobile number with letters or symbols | `abc@@@` | Rejected with a validation message - most likely defect area, since the field has no format constraint in the markup | Equivalence | Fail - Issue #2 |
 | TD-SU-30 | Mobile number length extremes | 1 digit / 30 digits | Rejected outside a sensible range, or accepted consistently | Boundary | [verify] |
 
 ---
@@ -176,20 +176,23 @@ enforce, and each is one test case.
 
 ## 10. Execution log
 
-Fill this in when the cases are run. Empty means designed but not executed.
+Cases marked `[verify]` are designed and waiting for a run. Cases with a result
+below were executed manually against the live site.
 
-| Date | Case ID | Browser | Result (Pass / Fail) | Defect ID | Note |
+| Date | Case ID | Browser | Result | Defect ID | Observation |
 |---|---|---|---|---|---|
-| | | | | | |
+| 2026-11-04 | TD-SU-19 | Brave 156, Windows 11 | Fail | [#1](../../issues/1) | Day = 31, Month = February, Year = 2000 accepted; redirected to `/account_created` with "ACCOUNT CREATED!" |
+| 2026-11-04 | TD-SU-29 | Brave 156, Windows 11 | Fail | #2 | Mobile = `aaa@@@` accepted; account created, no validation message |
+| 2026-11-04 | TD-SU-09 | Brave 156, Windows 11 | Pass | - | `Ali123@gmail.com` then `ali123@gmail.com` rejected as already existing - uniqueness is case-insensitive, as it should be |
 
 ---
 
 ## 11. What this document deliberately does not do
 
-- It does not claim these cases were executed. Rows marked `[verify]` are
-  designed and waiting for a run.
-- It does not invent validation messages. Messages quoted here are the two that
-  were actually observed on the site ("Email Address already exist!",
+- It does not claim these cases were executed beyond the three rows in the
+  execution log. Every other row is still marked `[verify]`.
+- It does not invent validation messages. Messages quoted here are the ones
+  actually observed on the site ("Email Address already exist!",
   "Account Created!").
 - It does not duplicate the automated suite. Automated tests prove the happy
   path works repeatedly; this document proves the failure paths were thought
